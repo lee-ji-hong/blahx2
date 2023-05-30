@@ -1,11 +1,10 @@
 import { Box, Button } from '@chakra-ui/react';
-import { on } from 'events';
 
 interface Props {
-  onClickLogin:() => void;
+  onClick:() => void;
 }
 
-export const GoogleLoginButton = function ({onClickLogin}:Props) {
+export const GoogleLoginButton = function ({onClick}:Props) {
   return (
     <Box>
       <Button
@@ -18,7 +17,7 @@ export const GoogleLoginButton = function ({onClickLogin}:Props) {
         colorScheme="blue"
         leftIcon={<img src="/google.svg" alt="google 로고" style={{ backgroundColor: 'white', padding: '8px' }} />}
         border="none"
-        onClick={onClickLogin}
+        onClick={onClick}
       >
         Google 계정으로 시작하기
       </Button>

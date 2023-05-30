@@ -1,5 +1,6 @@
 import FirebaseClient from "@/models/firebase_client";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { InAuthUser } from "@/models/in_auth_user";
+import { GoogleAuthProvider, User, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 export default function useFirebaseAuth() {
@@ -12,6 +13,21 @@ export default function useFirebaseAuth() {
       const signInResult = await signInWithPopup(FirebaseClient.getInstance().Auth, provider)
       if (signInResult.user) {
         console.info(signInResult.user);
+        const response = await fetch('/api/members.add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            uid: signInResult.user.uid,
+            email: signInResult.user.email,
+            displayName: signInResult.user.displayName,
+            photoURL: signInResult.user.photoURL,
+          }),
+        });
+        console.info({ status: response.status });
+        const responseData = await response.json();
+        console.info(responseData);
       }
     } catch (err) {
       console.error(err);

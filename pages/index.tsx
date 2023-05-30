@@ -2,6 +2,7 @@ import { Flex, Box, Heading, Center } from '@chakra-ui/react';
 import { ServiceLayout } from '@/components/service_layout';
 import { GoogleLoginButton } from '@/components/google_login_button';
 import { useAuth } from '@/contexts/auth_user.context';
+import { NextPage } from 'next/types';
 
 
 
